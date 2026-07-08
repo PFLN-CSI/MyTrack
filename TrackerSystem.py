@@ -2,6 +2,7 @@ import cv2
 import time
 import json
 import os
+import torch
 from ultralytics import YOLO
 
 from ParkLine import ParkLine
@@ -18,7 +19,7 @@ class TrackerSystem:
         # =========================
         # MODELO
         # =========================
-        self.model = YOLO("yolov8m.pt")
+        self.model = YOLO("Yolo26m.pt")
        
         # =========================
         # SISTEMAS
@@ -29,7 +30,7 @@ class TrackerSystem:
         # =========================
         # VÍDEO
         # =========================
-        self.cap = cv2.VideoCapture("v10.mp4")
+        self.cap = cv2.VideoCapture("aquisicao14.dav")
         #self.cap = cv2.VideoCapture("v10.mp4")
         self.cap.set(cv2.CAP_PROP_POS_MSEC, START_TIME_SECONDS * 1000)
 
@@ -50,7 +51,7 @@ class TrackerSystem:
     # ====================================================
     def setup_lines(self):
 
-        self.pLine = ParkLine((2667, 1085), (77, 352), (0, 0, 255), 3)
+        self.pLine = ParkLine((152, 190), (2681, 1090), (0, 0, 255), 3)
        
    
     # ====================================================
@@ -81,9 +82,9 @@ class TrackerSystem:
                 persist=True,
                 conf=0.3,                
                 classes=[2, 7],
-                tracker="meu_bytetrack.yaml",
+                tracker=os.path.join(os.path.dirname(__file__), "meu_bytetrack.yaml"),
                 verbose=False,
-                device=0,  
+                device=0 if torch.cuda.is_available() else "cpu",
             )
 
             # =========================
