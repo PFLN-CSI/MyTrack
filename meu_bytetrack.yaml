@@ -1,0 +1,23 @@
+tracker_type: bytetrack          # Algoritmo de rastreamento (ByteTrack)
+
+fuse_score: True                 # Usa confiança da detecção junto com IoU para melhorar a associação dos objetos.
+
+track_high_thresh: 0.5          # Confiança mínima para considerar uma detecção "forte".
+                                 # ↑ Aumentar: menos falsos positivos, porém perde objetos mais facilmente.
+                                 # ↓ Diminuir: mantém o ID mesmo com detecções fracas, mas pode gerar associações incorretas.
+
+new_track_thresh: 0.6           # Confiança mínima para criar um NOVO ID.
+                                 # ↑ Aumentar: evita criar IDs duplicados após pequenas oclusões.
+                                 # ↓ Diminuir: cria IDs novos mais rapidamente, aumentando duplicações.
+
+track_buffer: 120                # Quantidade de frames que um objeto pode ficar desaparecido antes de perder o ID.
+                                 # ↑ Aumentar: suporta oclusões longas (caminhões, ônibus, etc.).
+                                 # ↓ Diminuir: libera memória mais rápido, mas perde IDs facilmente.
+
+track_low_thresh: 0.75           # Confiança mínima para usar detecções fracas na manutenção de um ID existente.
+                                 # ↑ Aumentar: exige detecções mais confiáveis, porém perde objetos ocultos.
+                                 # ↓ Diminuir: melhora a continuidade do ID durante oclusões.
+
+match_thresh: 0.85              # Tolerância para associar uma detecção a um ID existente.
+                                 # ↑ Aumentar: associa objetos com mais facilidade (maior chance de manter o ID).
+                                 # ↓ Diminuir: exige maior semelhança, reduz trocas de ID, mas aumenta novos IDs.
