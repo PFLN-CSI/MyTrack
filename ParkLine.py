@@ -35,28 +35,7 @@ class ParkLine:
 
         return cross / self.length
 
-    # =====================================================
-    # Lado da linha
-    # =====================================================
-    def side_of_point(self, x: int, y: int) -> int:
-
-        d = self.signed_distance(x, y)
-
-        if d > 0:
-            return 1
-
-        if d < 0:
-            return -1
-
-        return 0
-
-    # =====================================================
-    # Distância absoluta
-    # =====================================================
-    def distance_to_point(self, x: int, y: int) -> float:
-
-        return abs(self.signed_distance(x, y))
-
+    
     # =====================================================
     # Bounding Box
     # =====================================================
@@ -80,46 +59,6 @@ class ParkLine:
             "signed_distance": signed
         }
 
-    # =====================================================
-    # Estilo
-    # =====================================================
-    def get_style(self):
-
-        return {
-            "color": self.color,
-            "thickness": self.thickness
-        }
-
-    # =====================================================
-    # Serialização
-    # =====================================================
-    def to_dict(self):
-
-        return {
-            "p1": (self.x1, self.y1),
-            "p2": (self.x2, self.y2),
-            "color": self.color,
-            "thickness": self.thickness
-        }
-    
-
-    #---------------------------------------------------
-    def _evaluate(self, obj, x1, y1, x2, y2):
-
-        line = obj["line"]
-
-        r = self.evaluate_bbox(x1, y1, x2, y2)
-
-        return {
-            "name": obj["name"],
-            "center": r["center"],
-            "side": r["side"],
-            "distance": r["distance"],
-            "signed_distance": r["signed_distance"],   # <-- adicionar
-            "color": line.color,
-            "thickness": line.thickness,
-            "p1": (line.x1, line.y1),
-            "p2": (line.x2, line.y2),
-        }
+         
 
    

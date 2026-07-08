@@ -138,9 +138,9 @@ class TrackerSystem:
                     else:                       
                         status = "indefinido"
 
-                    status="andando" if side > 0 else "estacionado"
+                 
                     # -------------------------
-                    # CAR MANAGER (RE-ID + CREATE)
+                    # CAR MANAGER 
                     # -------------------------
                     vehicle_type = self.model.names[classe]
                     tipo, car = self.car_manager.reidentify_or_create(
